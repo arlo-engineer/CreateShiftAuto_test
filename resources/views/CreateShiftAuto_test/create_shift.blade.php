@@ -11,14 +11,15 @@
         <form method="POST" action="{{ route('store') }}" class="form">
             @csrf
             @foreach ($items as $item)
+                <input type="hidden" name="num[]">
                 名前
-                <input type="text" name="name" value="{{ $item->name }}">
+                <input type="text" name="name[]" value="{{ $item->name }}">
                 勤務日
-                <input type="text" name="WorkingDate" value="{{ $item->DesireWorkingDate }}">
+                <input type="text" name="WorkingDate[]" value="{{ $item->DesireWorkingDate }}">
                 出勤時間
-                <input type="text" name="StartTime" value="{{ $item->DesireStartTime }}">
+                <input type="text" name="StartTime[]" value="{{ $item->DesireStartTime }}">
                 退勤時間
-                <input type="text" name="EndTime" value="{{ $item->DesireEndTime }}">
+                <input type="text" name="EndTime[]" value="{{ $item->DesireEndTime }}">
                 <br>
             @endforeach
             <button class="form-button">シフトを確定する</button>

@@ -17,12 +17,16 @@ class CreatedShiftController extends Controller
 
     public function store(Request $request)
     {
-        CreatedShift::create([
-            'name' => $request->name,
-            'WorkingDate' => $request->WorkingDate,
-            'StartTime' => $request->StartTime,
-            'EndTime' => $request->EndTime,
-        ]);
+        $i = 0;
+        foreach($request->num as $val) {
+            CreatedShift::create([
+                'name' => $request->name[$i],
+                'WorkingDate' => $request->WorkingDate[$i],
+                'StartTime' => $request->StartTime[$i],
+                'EndTime' => $request->EndTime[$i],
+            ]);
+            $i++;
+        }
 
         return to_route('submitted');
     }
