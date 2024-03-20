@@ -11,21 +11,19 @@ class CreatedShiftController extends Controller
     public function create()
     {
         $items = SubmittedShift::get();
-        // dd($items);
         return view('CreateShiftAuto_test.create_shift', compact('items'));
     }
 
     public function store(Request $request)
     {
-        $i = 0;
-        foreach($request->num as $val) {
+        for($i = 0; $i < 4 * 15; $i++) { // $iの上限は"スタッフ数*日数"に変更
+            if (!empty($request->StartTime[$i]) && !empty($request->EndTime[$i]))
             CreatedShift::create([
                 'name' => $request->name[$i],
                 'WorkingDate' => $request->WorkingDate[$i],
                 'StartTime' => $request->StartTime[$i],
                 'EndTime' => $request->EndTime[$i],
             ]);
-            $i++;
         }
 
         return to_route('submitted');
